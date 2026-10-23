@@ -550,6 +550,66 @@ footer span a:hover{
 }
 
 
+/* wave divider styling - animated double wave */
+.wave-divider{
+    position: relative;
+    height: 80px;
+    line-height: 0;
+    overflow: hidden;
+}
+.wave-divider .wave-layer{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    width: 200%;
+    height: 100%;
+}
+.wave-divider .wave-layer path{
+    fill: currentColor;
+}
+/* back layer: softer, slower, slightly squashed, offset phase */
+.wave-divider .wave-back{
+    height: 130%;
+    opacity: 0.35;
+    transform-origin: bottom;
+    animation: wave-move-back 13s linear infinite;
+}
+/* front layer: solid, faster */
+.wave-divider .wave-front{
+    animation: wave-move 7s linear infinite;
+}
+@keyframes wave-move{
+    from{ transform: translateX(-50%); }
+    to{ transform: translateX(0); }
+}
+@keyframes wave-move-back{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+}
+/* background = section above, wave colour = section below */
+.wave-from-light{ background: #fff; }
+.wave-from-dark{ background: #111; }
+.wave-to-light{ color: #fff; }
+.wave-to-dark{ color: #111; }
+/* hero wave overlaps the bottom of the banner image */
+.wave-overlap{
+    margin-top: -80px;
+    z-index: 2;
+    background: transparent;
+}
+/* alternate travel direction so consecutive waves don't all move the same way */
+.wave-flip .wave-front{ animation-direction: reverse; }
+.wave-flip .wave-back{ animation-direction: reverse; }
+@media (max-width: 690px) {
+    .wave-divider{ height: 50px; }
+    .wave-overlap{ margin-top: -50px; }
+}
+/* respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+    .wave-divider .wave-layer{ animation: none; }
+}
+
 /* responsive media query start */
 @media (max-width: 1300px) {
     .home .max-width{
